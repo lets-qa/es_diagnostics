@@ -1,11 +1,32 @@
 #!/usr/bin/env bash
 
+
+function show_help() {
+  cat <<EOF
+Usage: $0 [--env FILE] [--run TAG1,TAG2,...]
+
+Options:
+  --env FILE       Path to .env file with configuration variables.
+  --run TAGS       Comma-separated list of diagnostic checks to run.
+                   Available TAGS: health, stats, nodes, pending, indexstats, shards, indices, catnodes, threadpool
+  -h, --help       Display this help message.
+
+Examples:
+  $0 --env dev.env
+  $0 --env prod.env --run health,nodes
+EOF
+}
 # === CLI Argument Parsing ===
 ENV_FILE=".env"
 RUN_ALL=true
 RUN_KEYS=()
 
 while [[ $# -gt 0 ]]; do
+    -h|--help)
+      show_help
+      exit 0
+      ;;
+
   case "$1" in
     --env)
       ENV_FILE="$2"
