@@ -22,11 +22,6 @@ RUN_ALL=true
 RUN_KEYS=()
 
 while [[ $# -gt 0 ]]; do
-    -h|--help)
-      show_help
-      exit 0
-      ;;
-
   case "$1" in
     --env)
       ENV_FILE="$2"
@@ -37,13 +32,18 @@ while [[ $# -gt 0 ]]; do
       RUN_ALL=false
       shift 2
       ;;
+    -h|--help)
+      show_help
+      exit 0
+      ;;
     *)
       echo "❌ Unknown option: $1"
-      echo "Usage: $0 [--env path/to/envfile] [--run health,stats,nodes,...]"
+      show_help
       exit 1
       ;;
   esac
 done
+
 
 # === Load .env File ===
 if [ -f "$ENV_FILE" ]; then

@@ -78,3 +78,19 @@ Use the `--run` flag to selectively execute checks. Below is a list of available
 ```bash
 ./es_diagnostics.sh --env config/prod.env --run health,stats,threadpool
 ```
+
+### Help:
+```
+./es_diagnostics.sh -h
+Usage: ./es_diagnostics.sh [--env FILE] [--run TAG1,TAG2,...]
+
+Options:
+  --env FILE       Path to .env file with configuration variables.
+  --run TAGS       Comma-separated list of diagnostic checks to run.
+                   Available TAGS: health, stats, nodes, pending, indexstats, shards, indices, catnodes, threadpool
+  -h, --help       Display this help message.
+
+Examples:
+  ./es_diagnostics.sh --env dev.env
+  ./es_diagnostics.sh --env prod.env --run health,nodes
+```
